@@ -24,6 +24,7 @@ function calculateTotalEnergy() {
     return totalEnergy / 1000
 }
 
+console.log("Git testing update working")
 // -------LocalStorage function ---------------
 function saveData() {
     localStorage.setItem('appliances', JSON.stringify(appliances))
