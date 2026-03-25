@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Load Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!--Heading-->
+        <h1>Solar Load Calculator</h1>
+
+        <!--Solar Appliance Form--> 
+        <form id="appliance-form" novalidate>
+            <input type="text" id="name" placeholder="Appliance Name" required>
+            <input type="number" id="power" placeholder="Power (W)" required>
+            <input type="number" id="hours" placeholder="Hours Used" required>
+            <input type="number" id="quantity" placeholder="Quantity" value="1" required>
+            <label>
+                <input type="checkbox" id="isMotor">Motor Appliance
+            </label>
+
+            <button type="submit">Add Appliance</button>
+        </form>
+        
+        <!--Appliance List-->
+        <p id="appliance-error" class="error"></p>
+        <div id="appliance-list"></div>
+        
+        <h2>Total Energy: <span id="total-energy" class="result">0</span></h2>
+
+        <!--Panel Sizing-->
+        <section class="panel-section">
+            <h2>☀️ Panel Sizing</h2>
+            <form id="panel-form" novalidate>
+                <label for="sunHours">Peak Sun Hours</label>
+                <input type="number" id="sunHours" placeholder="e.g. 5" required>
+
+                <label for="watts">Panel Wattage</label>
+                <input type="number" id="watts" placeholder="e.g. 250" required>
+
+                <label for="efficiency">System Efficiency</label>
+                <input type="number" id="efficiency" min="50" max="90" placeholder="50 - 90%">
+
+                <button type="submit">Calculate Panel</button>
+            </form>
+            <p id="panel-error" class="error"></p>
+            <div class="result-card">
+                <p>☀️ Panels Needed</p>
+                <span id="panels-needed" class="result"></span>
+                <p>📦 System Size (KW)</p> 
+                <span id="system-size" class="result"></span>
+            </div>
+        </section>
+        <!--End of Solar Settings-->
+
+
+        <!--Battery Sizing-->
+        <section class="battery-section" >
+            <h2>🔋 Battery Sizing</h2>
+            <form id="battery-form" novalidate>
+                <label for="volt">Battery Voltage (V)</label>
+                <select id="volt">
+                    <option value="12">12V</option>
+                    <option value="24">24V</option>
+                    <option value="48">48V</option>
+                </select>
+
+                <label for="autonomy">Days of Autonomy</label>
+                <input type="number" id="autonomy" placeholder="e.g. 2" required>
+
+                <label for="dod">Depth of Discharge (0-100)</label>
+                <input type="number" id="dod" min="10" max="100" placeholder="20 - 90%">
+                
+                <button type="submit">Calculate Battery</button>
+            </form>
+            
+            <p id="battery-error" class="error"></p>
+            <h2>Required Battery Size: <span id="battery-result" class="result"></span></h2>
+            
+        </section>
+        <!--End of Battery Sizing-->
+
+
+        <section class="inverter-section">
+            <h2>⚡ Inverter Sizing</h2>
+            <form id="inverter-form" novalidate>
+                <label for="voltage">System Voltage (V)</label>
+                <select id="voltage">
+                    <option value="12">12V</option>
+                    <option value="24">24V</option>
+                    <option value="48">48V</option>
+                </select>
+
+                <label for="safety-margin">Safety Margin (%)</label>
+                <input type="number" id="safety-margin" min="0" max="50" placeholder="e.g. 25">
+
+                <label for="surge-multiplier">Surge Multiplier</label>
+                <input type="number" id="surge-multiplier" min="1" max="6" placeholder="1 - 6">
+                
+                <button type="submit">Calculate Inverter</button>
+            </form>
+            <p id="inverter-error" class="error"></p>
+            <p id="surge-result" class="result"></p>
+            <h2>
+                ⚡ Normal Load: <span id="normal-load" class="result">0 W</span><br>
+                🚀 Surge Load: <span id="surge-load" class="result">0 W</span><br>
+                🔌 Inverter Size: <span id="inverter-size" class="result">0 W</span>
+            </h2>
+        </section>
+        <!--End of Battery Sizing-->
+    </div>
+    <script src="load.js"></script>
+</body>
+</html>
