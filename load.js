@@ -6,21 +6,16 @@ function showResult(element, value) {
 }
 
 // -------Appliance Energy function ---------------
-function calculateEnergy(power, hours, quantity) {
-    return power * hours * quantity
+function getApplianceEnergy(app) {
+    return app.power * app.hours * app.quantity
 }
 
 // -------Total Appliance Energy function ---------------
 function calculateTotalEnergy() {
 
-    let totalEnergy = 0
-
-    for (let i = 0; i < appliances.length; i++) {
-
-        const app = appliances[i];
-        const energy = calculateEnergy(app.power, app.hours, app.quantity) 
-        totalEnergy += energy
-    }
+    const totalEnergy = appliances.reduce((sum, app) => {
+        return sum + getApplianceEnergy(app)
+    }, 0)
     return totalEnergy / 1000
 }
 
@@ -63,7 +58,7 @@ function renderAppliances() {
     for (let i = 0; i < appliances.length; i++) {
 
         const app = appliances[i];
-        const energy = calculateEnergy(app.power, app.hours, app.quantity)
+        const energy = getApplianceEnergy(app)
 
         html += `
         <div class="appliance-card">

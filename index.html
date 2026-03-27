@@ -3,15 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar Load Calculator</title>
+    <title>Sparkify⚡ Solar Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2226%22 font-size=%2232%22>⚡</text></svg>" type="image/svg+xml">
+
+    <!-- Optional: Meta Description for SEO -->
+    <meta name="description" content="Sparkify⚡ — Smart solar sizing made simple. Calculate appliances, panels, battery, and inverter needs easily.">
+
+    <!-- Optional: Theme Color for mobile browsers -->
+    <meta name="theme-color" content="#FFD700"
 </head>
 <body>
     <div class="container">
         <!--Heading-->
-        <h1>Solar Load Calculator</h1>
+        <header class="app-header">
+            <div class="logo">⚡</div>
+            <h1 class="app-title">Sparkify⚡ Solar Calculator</h1>
+            <p class="app-subtitle">Smart solar sizing made simple</p>
+        </header>
 
         <!--Solar Appliance Form--> 
+        <div class="card">
         <form id="appliance-form" novalidate>
             <input type="text" id="name" placeholder="Appliance Name" required>
             <input type="number" id="power" placeholder="Power (W)" required>
@@ -29,8 +41,11 @@
         <div id="appliance-list"></div>
         
         <h2>Total Energy: <span id="total-energy" class="result">0</span></h2>
+        </div>
+
 
         <!--Panel Sizing-->
+        <div class="card">
         <section class="panel-section">
             <h2>☀️ Panel Sizing</h2>
             <form id="panel-form" novalidate>
@@ -48,15 +63,17 @@
             <p id="panel-error" class="error"></p>
             <div class="result-card">
                 <p>☀️ Panels Needed</p>
-                <span id="panels-needed" class="result"></span>
+                <span id="panels-needed" class="result result-box"></span>
                 <p>📦 System Size (KW)</p> 
-                <span id="system-size" class="result"></span>
+                <span id="system-size" class="result result-box"></span>
             </div>
         </section>
+        </div>
         <!--End of Solar Settings-->
 
 
         <!--Battery Sizing-->
+        <div class="card">
         <section class="battery-section" >
             <h2>🔋 Battery Sizing</h2>
             <form id="battery-form" novalidate>
@@ -77,12 +94,14 @@
             </form>
             
             <p id="battery-error" class="error"></p>
-            <h2>Required Battery Size: <span id="battery-result" class="result"></span></h2>
+            <h2>Required Battery Size: <span id="battery-result" class="result result-box"></span></h2>
             
         </section>
+        </div>
         <!--End of Battery Sizing-->
 
-
+        <!--Inverter Sizing-->
+        <div class="card">
         <section class="inverter-section">
             <h2>⚡ Inverter Sizing</h2>
             <form id="inverter-form" novalidate>
@@ -106,10 +125,11 @@
             <h2>
                 ⚡ Normal Load: <span id="normal-load" class="result">0 W</span><br>
                 🚀 Surge Load: <span id="surge-load" class="result">0 W</span><br>
-                🔌 Inverter Size: <span id="inverter-size" class="result">0 W</span>
+                🔌 Inverter Size: <span id="inverter-size" class="result result-box">0 W</span>
             </h2>
         </section>
-        <!--End of Battery Sizing-->
+        </div>
+        <!--End of Inverter Sizing-->
     </div>
     <script src="load.js"></script>
 </body>
