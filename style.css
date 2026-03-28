@@ -315,3 +315,7 @@ section:hover {
     color: #ffd700;
     transition: all 0.3s ease;
 }
+
+.disable {
+    opacity: 0.5;
+}

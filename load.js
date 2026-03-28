@@ -69,10 +69,18 @@ function renderAppliances() {
         </div>
         `
     }
+    const surgeInput = document.getElementById("surge-multiplier")
+    if (!hasMotorAppliance()) {
+        surgeInput.disabled = true
+        surgeInput.classList.add('disable')
+    } else {
+        surgeInput.disabled = false
+    }
+
     listEl.innerHTML = html
     const totalEnergyKwh = calculateTotalEnergy()
     const totalEnergyWh = totalEnergyKwh * 1000
-    total.innerText = `${totalEnergyWh} Wh (${totalEnergyKwh.toFixed(2)} KWh)`
+    total.innerText = `${Math.round(totalEnergyWh)} Wh (${totalEnergyKwh.toFixed(2)} KWh)`
 }
 
 
@@ -273,7 +281,7 @@ batteryForm.addEventListener('submit', (e)=>{
         const dailyEnergy = calculateTotalEnergy()
 
         if (dailyEnergy === 0) {
-            throw "Add at least one appliance"
+            throw "Add appliances first"
         }
 
         const result = calculateBattery(dailyEnergy, voltage, autonomy, dod)
@@ -295,6 +303,10 @@ batteryForm.addEventListener('submit', (e)=>{
 
 
 // --------------Inverter sizing functions----------------------
+function hasMotorAppliance() {
+    return appliances.some(app => app.isMotor)
+}
+
 function calculatePeakLoad(appliances, surgeMultiplier) {
     let normalLoad = 0
     let surgeLoad = 0
@@ -343,6 +355,9 @@ inverterForm.addEventListener("submit", e => {
     e.preventDefault()
     
     const safeMarginInput = Number(document.getElementById("safety-margin").value);
+    if (!hasMotorAppliance()) {
+            document.getElementById("surge-multiplier").value = 1
+        }
     const surgeMultiplier = Number(document.getElementById("surge-multiplier").value);
     
 
@@ -364,6 +379,10 @@ inverterForm.addEventListener("submit", e => {
 
         
         document.getElementById("inverter-error").innerText = ''
+        if (!hasMotorAppliance()) {
+            document.getElementById("inverter-error").innerText = "No motor appliances detected. Surge ignored"
+            surgeResult.classList.add("disable")
+        }
     } catch (error) {
         document.getElementById("inverter-error").innerText = error
     }
